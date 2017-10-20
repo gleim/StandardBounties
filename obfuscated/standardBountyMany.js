@@ -4,7 +4,7 @@ const HumanStandardToken = artifacts.require("../contracts/inherited/HumanStanda
 const utils = require('./helpers/Utils');
 
 
-contract('StandardBounties', function(accounts) {
+contract('StandardBounties (many)', function(accounts) {
 
   it("[ETH] Verifies that I can issue new bounties paying in ETH", async () => {
 
