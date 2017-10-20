@@ -1,7 +1,7 @@
-import assert from 'assert'
-import _ from 'lodash'
-import Gnosis from '../src/index'
-import TestRPC from 'ethereumjs-testrpc'
+const assert = require("assert");
+const _ = require("lodash");
+const Gnosis = require("gnosisjs");
+const TestRPC = require("ethereumjs-testrpc");
 
 const options = process.env.GNOSIS_OPTIONS ? JSON.parse(process.env.GNOSIS_OPTIONS) : null
 
