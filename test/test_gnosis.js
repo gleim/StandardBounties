@@ -48,34 +48,62 @@ describe('Gnosis', function () {
     })
 
     it('initializes with defaults', async () => {
-        let gnosis = await Gnosis.create()
-        assert(gnosis)
+        let gnosis
+        try {
+            Gnosis.create().then(result => {
+                gnosis = result            
+                assert(gnosis)
+            })
+        } catch (error){
+          return utils.ensureException(error);
+        }        
     })
 
-    it('initializes with options', async () => {
-        let gnosis = await Gnosis.create({
-            ethereum: 'http://localhost:8545',
-            ipfs: '',
-            gnosisdb: 'https:/db.gnosis.pm'
-        })
-        assert(gnosis)
+   it('initializes with options', async () => {
+        let gnosis
+        try {
+            Gnosis.create({
+                ethereum: 'http://localhost:8545',
+                ipfs: '',
+                gnosisdb: 'https:/db.gnosis.pm'
+            }).then(result => {
+                gnosis = result            
+                assert(gnosis)
+            })
+        } catch (error){
+          return utils.ensureException(error);
+        }        
     })
 
     it('initializes with a provider', async () => {
-        let gnosis = await Gnosis.create({
-            ethereum: TestRPC.provider(),
-        })
-        assert(gnosis)
+        let gnosis
+        try {
+            Gnosis.create({
+                ethereum: TestRPC.provider(),
+            }).then(result => {
+                gnosis = result            
+                assert(gnosis)
+            })
+        } catch (error){
+          return utils.ensureException(error);
+        }        
     })
 
     it('initializes with contracts containing gas stats', async () => {
-        let gnosis = await Gnosis.create()
-        assert(gnosis.contracts)
-        assert(gnosis.contracts.CentralizedOracle.gasStats)
-        assert(Object.keys(gnosis.contracts.CentralizedOracle.gasStats)
-            .every((k) => gnosis.contracts.CentralizedOracle.abi
-                .find(({ type, name }) => type === 'function' && name === k)))
-        assert(gnosis.standardMarketFactory.gasStats)
+        let gnosis
+        try {
+            Gnosis.create().then(result => {
+                gnosis = result            
+                assert(gnosis.contracts)
+                assert(gnosis.contracts.CentralizedOracle.gasStats)
+                assert(Object.keys(gnosis.contracts.CentralizedOracle.gasStats)
+                    .every((k) => gnosis.contracts.CentralizedOracle.abi
+                        .find(({ type, name }) => type === 'function' && name === k)))
+                assert(gnosis.standardMarketFactory.gasStats)
+            })
+        } catch (error){
+          return utils.ensureException(error);
+        }        
     })
 
     describe('#oracles', () => {
