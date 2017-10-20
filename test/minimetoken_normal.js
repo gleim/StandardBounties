@@ -2,7 +2,7 @@ const ethConnector = require("ethconnector");
 const assert = require("assert"); // node.js core module
 const async = require("async");
 
-const MiniMeToken = require("../js/minimetoken");
+const MiniMeToken = require("minimetoken");
 
 const verbose = false;
 
