@@ -2,6 +2,7 @@ const assert = require("assert");
 const _ = require("lodash");
 const Gnosis = require("@gnosis.pm/gnosisjs");
 const TestRPC = require("ethereumjs-testrpc");
+const utils = require('./helpers/Utils');
 
 const options = process.env.GNOSIS_OPTIONS ? JSON.parse(process.env.GNOSIS_OPTIONS) : null
 
@@ -75,21 +76,45 @@ describe('Gnosis', function () {
         }        
     })
 
-    it('initializes with a provider', async () => {
+    it('initializes with contracts', async () => {
         let gnosis
         try {
-            Gnosis.create({
-                ethereum: TestRPC.provider(),
-            }).then(result => {
+            Gnosis.create().then(result => {
                 gnosis = result            
-                assert(gnosis)
+                assert(gnosis.contracts)
             })
         } catch (error){
           return utils.ensureException(error);
         }        
     })
 
-    it('initializes with contracts containing gas stats', async () => {
+    it('initializes with centralized oracle gas stats', async () => {
+        let gnosis
+        try {
+            Gnosis.create().then(result => {
+                gnosis = result            
+                assert(gnosis.contracts)
+                assert(gnosis.contracts.CentralizedOracle.gasStats)
+            })
+        } catch (error){
+          return utils.ensureException(error);
+        }        
+    })
+
+    it('initializes with standard market factory gas stats', async () => {
+        let gnosis
+        try {
+            Gnosis.create().then(result => {
+                gnosis = result            
+                assert(gnosis.contracts)
+                assert(gnosis.standardMarketFactory.gasStats)
+            })
+        } catch (error){
+          return utils.ensureException(error);
+        }        
+    })
+
+    it('initializes with contracts containing key-value pairs', async () => {
         let gnosis
         try {
             Gnosis.create().then(result => {
